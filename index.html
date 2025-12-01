@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Rutas Inteligentes 2025 – Zamora & Jacona</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Leaflet desde CDN estable -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+
+  <!-- NUEVO: estilos externos -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div>
+        <h1>Rutas Inteligentes 2025</h1>
+        <p class="subtitle">
+          Zamora &amp; Jacona · Elige tu destino y te sugerimos ruta, paradas y
+          tiempo aproximado.
+        </p>
+        <span class="badge" id="smartRoutingStatus">
+          SmartRouting: Iniciando…
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="destinationInput">Destino</label>
+        <div class="input-row">
+          <input
+            id="destinationInput"
+            type="text"
+            placeholder="Ej. Soriana Zamora"
+            autocomplete="off"
+          />
+          <button id="searchButton">Buscar ruta</button>
+        </div>
+
+        <div id="destinationSuggestions" class="suggestions"></div>
+      </div>
+
+      <div>
+        <div class="section-title">Instrucciones</div>
+        <div id="instructionsBox" class="instructions">
+          Escribe un destino (ej. <strong>Soriana Zamora</strong>) y pulsa
+          <strong>Buscar ruta</strong>.<br /><br />
+          1. Localizaremos tu posición actual.<br />
+          2. Geocodificaremos el destino.<br />
+          3. Resaltaremos la ruta sugerida.<br />
+          4. Te mostraremos paradas y tiempos estimados.
+        </div>
+      </div>
+
+      <div>
+        <div class="section-title">Leyenda</div>
+        <div class="legend">
+          <div class="legend-item">
+            <div class="legend-color" style="background:#8b4513;"></div>
+            <span>Ruta Café</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background:#a21caf;"></div>
+            <span>Ruta Morada</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="border-color:#2563eb;"></div>
+            <span>Tu ubicación</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="border-color:#16a34a;"></div>
+            <span>Destino</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="border-color:#f97316;"></div>
+            <span>Parada de subida</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="border-color:#dc2626;"></div>
+            <span>Parada de bajada</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main id="map"></main>
+  </div>
+
+  <!-- SVG para glow -->
+  <svg width="0" height="0">
+    <defs>
+      <filter id="glow-line">
+        <feGaussianBlur stdDeviation="3" result="coloredBlur"></feGaussianBlur>
+        <feMerge>
+          <feMergeNode in="coloredBlur"></feMergeNode>
+          <feMergeNode in="SourceGraphic"></feMergeNode>
+        </feMerge>
+      </filter>
+    </defs>
+  </svg>
+
+  <script src="app.js"></script>
+</body>
+</html>
